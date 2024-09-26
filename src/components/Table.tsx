@@ -254,7 +254,6 @@ const StyledTable = styled.table`
 
 const FormDetails = styled.form({
     width: "100%",
-    padding: "10px",
     display: "flex",
     gap: "15px",
     flexDirection: "column",
@@ -262,5 +261,7 @@ const FormDetails = styled.form({
 
 const BoxInput = styled.div({
     display: "flex",
-    gap: "10px"
+    gap: "10px",
+    width: "100%",
+    marginTop: "10px"
 })
