@@ -1,18 +1,25 @@
-import { Button, FormControl, InputLabel, MenuItem, Modal, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { Button, FormControl, InputLabel, MenuItem, Modal, Select, TextField } from "@mui/material";
 import { FormContainer } from "../style/FormContainer";
 import styled from "styled-components";
-import { ChangeEvent, SyntheticEvent, useState } from "react";
 import { api } from "../config/api";
 import { toast } from "sonner";
+import { useForm } from "react-hook-form";
 
 interface PropsModal {
     openModal: boolean;
     closeModal: () => void;
 }
 
+interface FormData {
+    nome: string
+    tipo: string
+    status: string
+    img_url: string
+}
+
 const BoxInput = styled.div({
     display: "flex",
-    gap: "10px",
+    gap: "5px",
     marginTop: "20px"
 })
 
@@ -24,67 +31,19 @@ const BoxButton = styled.div({
 
 export default function Form({ openModal, closeModal }: PropsModal) {
 
-    //ESTADOS E FUNÇÕES PARA MANIPULAR OS INPUTS!!!!!!
-    const [nome, setNome] = useState<string>("");
-    const [tipo, setTipo] = useState<string>("");
-    const [status, setStatus] = useState<string>("");
-    const [imagem, setImagem] = useState<string>("");
+    const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
 
-    function changeNome(e: ChangeEvent<HTMLInputElement>) {
-        setNome(e.target.value);
-    }
-
-    function changeTipo(e: SelectChangeEvent) {
-        setTipo(e.target.value);
-    }
-
-    function changeStatus(e: SelectChangeEvent) {
-        setStatus(e.target.value);
-    }
-
-    function changeImagem(e: ChangeEvent<HTMLInputElement>) {
-        setImagem(e.target.value);
-    }
-
-    //----------------------------------------------------------------
-
-    //FUNÇÃO DE POST!!!!!!
-    async function addEquipamento(e: SyntheticEvent) {
-        e.preventDefault();
-
-        const data = {
-            nome: nome,
-            tipo: tipo,
-            status: status,
-            img_url: imagem
-        }
-
-        // console.log(data);
-
+    async function postEquipamento(data: FormData) {
         try {
-            if (nome && tipo && status && imagem) {
-                const response = await api.post("equipamento", data, {
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
+            const response = await api.post("equipamento", data)
 
-                toast.success("Equipamento adicionado!");
-                setNome("");
-                setTipo("");
-                setStatus("");
-                setImagem("");
-
-                console.log(response);
-                closeModal();
-            } else {
-                toast.error("Preencha os campos corretamente.");
-            }
+            console.log(response.data);
+            closeModal();
+            toast.success("Equipamento criado com sucesso!");
         } catch (error) {
-            console.log(error);
+            toast.error("Erro")
         }
     }
-    //-----------------------------------------------------------------------
 
     return (
         <>
@@ -92,10 +51,11 @@ export default function Form({ openModal, closeModal }: PropsModal) {
                 open={openModal}
                 onClose={closeModal}
             >
-                <FormContainer onSubmit={addEquipamento}>
+                <FormContainer onSubmit={handleSubmit(postEquipamento)}>
                     <p>Adicionar novo equipamento</p>
-                    <BoxInput>
-                        <TextField fullWidth type="text" variant="outlined" label="Nome" value={nome} onChange={changeNome} name="nome" />
+                    <BoxInput style={{display: "flex", flexDirection: "column"}}>
+                        <TextField fullWidth type="text" variant="outlined" label="Nome" {...register("nome", {required: "Este campo é obrigatório."})} />
+                        <p style={{color: "red"}}>{errors.nome?.message}</p>
                     </BoxInput>
                     <BoxInput>
                         <FormControl fullWidth>
@@ -104,14 +64,13 @@ export default function Form({ openModal, closeModal }: PropsModal) {
                                 labelId="id-equipamento-label"
                                 id="id-equipamento"
                                 label="Tipo"
-                                value={tipo}
-                                onChange={changeTipo}
-                                name="tipo"
+                                {...register("tipo", { required: "Este campo é obrigatório." })}
                             >
                                 <MenuItem value="Caminhão">Caminhão</MenuItem>
                                 <MenuItem value="Escavadeira">Escavadeira</MenuItem>
                                 <MenuItem value="Guindaste">Guindaste</MenuItem>
                             </Select>
+                            <p style={{color: "red"}}>{errors.tipo?.message}</p>
                         </FormControl>
                         <FormControl fullWidth>
                             <InputLabel id="id-status-label">Status</InputLabel>
@@ -119,19 +78,19 @@ export default function Form({ openModal, closeModal }: PropsModal) {
                                 labelId="id-status-label"
                                 id="id-status"
                                 label="Status"
-                                value={status}
-                                onChange={changeStatus}
-                                name="status"
+                                {...register("status", { required: "Este campo é obrigatório." })}
                             >
                                 <MenuItem value="Ativo">Ativo</MenuItem>
                                 <MenuItem value="Quebrado">Quebrado</MenuItem>
                                 <MenuItem value="Manutenção">Manutenção</MenuItem>
                                 <MenuItem value="Parado na oficina">Parado na oficina</MenuItem>
                             </Select>
+                            <p style={{color: "red"}}>{errors.status?.message}</p>
                         </FormControl>
                     </BoxInput>
-                    <BoxInput>
-                        <TextField fullWidth label="URL da imagem" variant="outlined" value={imagem} onChange={changeImagem} name="img_url" />
+                    <BoxInput style={{display: "flex", flexDirection: "column"}}>
+                        <TextField fullWidth label="URL da imagem" variant="outlined" {...register("img_url", { required: "Este campo é obrigatório." })} />
+                        <p style={{color: "red"}}>{errors.img_url?.message}</p>
                     </BoxInput>
                     <BoxButton>
                         <Button variant="contained" type="submit">Adicionar equipamento</Button>

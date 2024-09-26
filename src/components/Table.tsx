@@ -2,8 +2,18 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { EquipamentoType } from "../type/equipamento";
 import { api } from "../config/api";
 import styled from "styled-components";
-import { Button, Dialog, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TableBody, TableCell, TableFooter, TableHead, TablePagination, TableRow, TextField } from "@mui/material";
+import { Box, Button, Dialog, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, TableBody, TableCell, TableFooter, TableHead, TablePagination, TableRow, TextField } from "@mui/material";
 import { toast } from "sonner";
+import { useForm } from "react-hook-form";
+
+interface FormData {
+    id: number
+    nome: string
+    tipo: string
+    status: string
+    img_url: string
+}
+
 
 export default function Table() {
 
@@ -50,10 +60,6 @@ export default function Table() {
 
     function handleOpen(equipamento: EquipamentoType) {
         setSelectedEquipamento(equipamento);
-        setNome(equipamento.nome);
-        setTipo(equipamento.tipo);
-        setStatus(equipamento.status);
-        setImagem(equipamento.img_url);
         setOpen(true);
     }
 
@@ -62,64 +68,21 @@ export default function Table() {
         setOpen(false);
     }
 
-    //ESTADOS E FUNÇÕES PARA MANIPULAR OS INPUTS!!!!!!
-    const [nome, setNome] = useState<string>("");
-    const [tipo, setTipo] = useState<string>("");
-    const [status, setStatus] = useState<string>("");
-    const [imagem, setImagem] = useState<string>("");
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
 
-    function changeNome(e: ChangeEvent<HTMLInputElement>) {
-        setNome(e.target.value);
-    }
-
-    function changeTipo(e: SelectChangeEvent) {
-        setTipo(e.target.value);
-    }
-
-    function changeStatus(e: SelectChangeEvent) {
-        setStatus(e.target.value);
-    }
-
-    function changeImagem(e: ChangeEvent<HTMLInputElement>) {
-        setImagem(e.target.value);
-    }
-
-    //----------------------------------------------------------------
-
-    //FUNÇÃO DE POST!!!!!!
-    async function editEquipamento(id: number) {
-        const data = {
-            nome: nome,
-            tipo: tipo,
-            status: status,
-            img_url: imagem
-        }
-
-        // console.log(data);
-
+    async function editEquipamento(data: FormData) {
         try {
-            if (nome && tipo && status && imagem) {
-                const response = await api.put(`equipamento/${id}`, data, {
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
+            const response = await api.put(`equipamento/${data.id}`, data)
 
-                toast.success("Equipamento atualizado!");
-                setNome("");
-                setTipo("");
-                setStatus("");
-                setImagem("");
-
-                console.log(response);
-                setOpen(false);
-            } else {
-                toast.error("Preencha os campos corretamente.");
-            }
+            console.log(response);
+            toast.success("Equipamento atualizado com sucesso!")
+            setOpen(false);
         } catch (error) {
             console.log(error);
         }
     }
+
+    
 
     return (
         <>
@@ -174,51 +137,53 @@ export default function Table() {
                                 )
                             }
                         </div>
-                        <FormDetails onSubmit={() => editEquipamento(selectedEquipamento.id)}>
-                            <BoxInput>
-                                <TextField variant="outlined" label="Nome" value={nome} fullWidth onChange={changeNome} name="nome" />
-                            </BoxInput>
-                            <BoxInput>
-                                <FormControl fullWidth>
+                        <form onSubmit={handleSubmit(editEquipamento)} style={{ marginTop: "10px", maxWidth: "600px", width: "100%" }}>
+                            <Box>
+                                <TextField defaultValue={selectedEquipamento.nome} variant="outlined" label="Nome" {...register("nome", { required: "Este campo é obrigatórtio." })} fullWidth />
+                                <p style={{ color: "red", fontSize: "12px" }}>{errors.nome?.message}</p>
+                            </Box>
+                            <Box sx={{ display: "flex", gap: "5px" }}>
+                                <FormControl fullWidth sx={{ display: "flex", flexDirection: "column" }}>
                                     <InputLabel id="id-equipamento-label">Tipo</InputLabel>
                                     <Select
                                         labelId="id-equipamento-label"
                                         id="id-equipamento"
                                         label="Tipo"
-                                        value={tipo}
-                                        onChange={changeTipo}
-                                        name="tipo"
+                                        {...register("tipo", { required: "Este campo é obrigatório" })}
+                                        defaultValue={selectedEquipamento.tipo}
                                     >
                                         <MenuItem value="Caminhão">Caminhão</MenuItem>
                                         <MenuItem value="Escavadeira">Escavadeira</MenuItem>
                                         <MenuItem value="Guindaste">Guindaste</MenuItem>
                                     </Select>
+                                    <p style={{ color: "red", fontSize: "12px" }}>{errors.tipo?.message}</p>
                                 </FormControl>
-                                <FormControl fullWidth>
+                                <FormControl fullWidth sx={{ display: "flex", flexDirection: "column" }}>
                                     <InputLabel id="id-status-label">Status</InputLabel>
                                     <Select
                                         labelId="id-status-label"
                                         id="id-status"
                                         label="Status"
-                                        value={status}
-                                        onChange={changeStatus}
-                                        name="status"
+                                        {...register("status", { required: "Este campo é obrigatório" })}
+                                        defaultValue={selectedEquipamento.status}
                                     >
                                         <MenuItem value="Ativo">Ativo</MenuItem>
                                         <MenuItem value="Quebrado">Quebrado</MenuItem>
                                         <MenuItem value="Manutenção">Manutenção</MenuItem>
                                         <MenuItem value="Parado na oficina">Parado na oficina</MenuItem>
                                     </Select>
+                                    <p style={{ color: "red", fontSize: "12px" }}>{errors.status?.message}</p>
                                 </FormControl>
-                            </BoxInput>
-                            <BoxInput>
-                                <TextField variant="outlined" label="URL da imagem" value={imagem} fullWidth onChange={changeImagem} name="img_url" />
-                            </BoxInput>
-                            <BoxInput style={{ display: "flex", justifyContent: "flex-end" }}>
+                            </Box>
+                            <Box >
+                                <TextField defaultValue={selectedEquipamento.status} variant="outlined" label="URL da imagem" {...register("img_url", { required: "Este campo é obrigatório" })} fullWidth />
+                                <p style={{ color: "red", fontSize: "12px" }}>{errors.img_url?.message}</p>
+                            </Box>
+                            <Box style={{ display: "flex", justifyContent: "flex-end", gap: "5px" }}>
                                 <Button variant="contained" sx={{ backgroundColor: "red" }} onClick={() => deleteEquipamento(selectedEquipamento.id)}>Deletar</Button>
                                 <Button variant="contained" type="submit">Salvar</Button>
-                            </BoxInput>
-                        </FormDetails>
+                            </Box>
+                        </form>
                     </DialogContent>
                 </Dialog>
             }
@@ -252,16 +217,3 @@ const StyledTable = styled.table`
     }
 `;
 
-const FormDetails = styled.form({
-    width: "100%",
-    display: "flex",
-    gap: "15px",
-    flexDirection: "column",
-});
-
-const BoxInput = styled.div({
-    display: "flex",
-    gap: "10px",
-    width: "100%",
-    marginTop: "10px"
-})
