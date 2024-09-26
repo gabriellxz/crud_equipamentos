@@ -68,7 +68,7 @@ export default function Table() {
         setOpen(false);
     }
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
+    const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
 
     async function editEquipamento(data: FormData) {
         try {
