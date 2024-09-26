@@ -3,6 +3,7 @@ import { useState } from "react";
 import Form from "./components/Form";
 import styled from "styled-components";
 import Table from "./components/Table";
+import { Toaster } from "sonner";
 
 const Container = styled.div({
   display: "flex",
@@ -28,6 +29,7 @@ function App() {
       <Fab color="primary" style={{ fontSize: "20px", position: "fixed", bottom: "20px", right: "20px" }} onClick={handleOpen}>
         +
       </Fab>
+      <Toaster richColors/>
     </Container>
   )
 }

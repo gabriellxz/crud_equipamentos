@@ -1,10 +1,80 @@
 {
   "equipamento": [
     {
-      "id": "b174",
-      "nome": "mercedes",
+      "nome": "carro",
       "tipo": "Escavadeira",
       "status": "Parado na oficina",
+      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn",
+      "id": "b174"
+    },
+    {
+      "id": "75f5",
+      "nome": "caminhão",
+      "tipo": "Caminhão",
+      "status": "Ativo",
+      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
+    },
+    {
+      "id": "ac05",
+      "nome": "caminhão",
+      "tipo": "Caminhão",
+      "status": "Ativo",
+      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
+    },
+    {
+      "id": "25d9",
+      "nome": "caminhão",
+      "tipo": "Caminhão",
+      "status": "Ativo",
+      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
+    },
+    {
+      "id": "fb52",
+      "nome": "caminhão",
+      "tipo": "Caminhão",
+      "status": "Ativo",
+      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
+    },
+    {
+      "id": "bb49",
+      "nome": "caminhão",
+      "tipo": "Caminhão",
+      "status": "Ativo",
+      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
+    },
+    {
+      "id": "613d",
+      "nome": "caminhão",
+      "tipo": "Caminhão",
+      "status": "Ativo",
+      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
+    },
+    {
+      "id": "fd03",
+      "nome": "caminhão",
+      "tipo": "Caminhão",
+      "status": "Ativo",
+      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
+    },
+    {
+      "id": "acd5",
+      "nome": "mercedes",
+      "tipo": "Caminhão",
+      "status": "Ativo",
+      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
+    },
+    {
+      "id": "dc6c",
+      "nome": "mercedes",
+      "tipo": "Caminhão",
+      "status": "Quebrado",
+      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
+    },
+    {
+      "id": "67e1",
+      "nome": "mercedes",
+      "tipo": "Escavadeira",
+      "status": "Quebrado",
       "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
     }
   ]

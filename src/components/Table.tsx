@@ -28,8 +28,8 @@ export default function Table() {
         getEquipamentos();
     }, [equipamento]);
 
-    function handleChangePage(page: number) {
-        setPage(page);
+    function handleChangePage(event: unknown, newPage: number) {
+        setPage(newPage);
     }
 
     function handleChangeRowsPerPage(event: ChangeEvent<HTMLInputElement>) {
@@ -134,7 +134,7 @@ export default function Table() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {equipamento.map((e: EquipamentoType) => (
+                        {equipamento.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((e: EquipamentoType) => (
                             <TableRow key={e.id} onClick={() => handleOpen(e)} sx={{ cursor: "pointer" }}>
                                 <TableCell>{e.id}</TableCell>
                                 <TableCell>{e.nome}</TableCell>
@@ -146,12 +146,12 @@ export default function Table() {
                     <TableFooter>
                         <TableRow>
                             <TablePagination
-                                rowsPerPageOptions={[5, 10, 25]} // Opções para mudar o número de linhas por página
-                                count={equipamento.length} // Total de equipamentos
-                                rowsPerPage={rowsPerPage} // Número de linhas por página atual
-                                page={page} // Página atual
-                                onPageChange={() => handleChangePage(10)} // Função para mudar de página
-                                onRowsPerPageChange={handleChangeRowsPerPage} // Função para mudar o número de linhas por página
+                                rowsPerPageOptions={[5, 10, 25]}
+                                count={equipamento.length}
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                onPageChange={handleChangePage}
+                                onRowsPerPageChange={handleChangeRowsPerPage}
                             />
                         </TableRow>
                     </TableFooter>
@@ -176,7 +176,7 @@ export default function Table() {
                         </div>
                         <FormDetails onSubmit={() => editEquipamento(selectedEquipamento.id)}>
                             <BoxInput>
-                                <TextField variant="outlined" label="Nome" value={nome} fullWidth onChange={changeNome} name="nome"/>
+                                <TextField variant="outlined" label="Nome" value={nome} fullWidth onChange={changeNome} name="nome" />
                             </BoxInput>
                             <BoxInput>
                                 <FormControl fullWidth>
@@ -212,7 +212,7 @@ export default function Table() {
                                 </FormControl>
                             </BoxInput>
                             <BoxInput>
-                                <TextField variant="outlined" label="URL da imagem" value={imagem} fullWidth onChange={changeImagem}  name="img_url"/>
+                                <TextField variant="outlined" label="URL da imagem" value={imagem} fullWidth onChange={changeImagem} name="img_url" />
                             </BoxInput>
                             <BoxInput style={{ display: "flex", justifyContent: "flex-end" }}>
                                 <Button variant="contained" sx={{ backgroundColor: "red" }} onClick={() => deleteEquipamento(selectedEquipamento.id)}>Deletar</Button>

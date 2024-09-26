@@ -3,7 +3,7 @@ import { FormContainer } from "../style/FormContainer";
 import styled from "styled-components";
 import { ChangeEvent, SyntheticEvent, useState } from "react";
 import { api } from "../config/api";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 
 interface PropsModal {
     openModal: boolean;
@@ -138,7 +138,6 @@ export default function Form({ openModal, closeModal }: PropsModal) {
                     </BoxButton>
                 </FormContainer>
             </Modal>
-            <Toaster richColors/>
         </>
     );
 }
