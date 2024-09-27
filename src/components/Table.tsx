@@ -2,9 +2,11 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { EquipamentoType } from "../type/equipamento";
 import { api } from "../config/api";
 import styled from "styled-components";
-import { Box, Button, Dialog, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, TableBody, TableCell, TableFooter, TableHead, TablePagination, TableRow, TextField } from "@mui/material";
+import { Box, Button, Dialog, DialogContent, DialogTitle, FormControl, MenuItem, TableBody, TableCell, TableFooter, TableHead, TablePagination, TableRow, TextField } from "@mui/material";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface FormData {
     id: number
@@ -14,6 +16,17 @@ interface FormData {
     img_url: string
 }
 
+const equipamentosSchema = z.object({
+    id: z.number(),
+    nome: z.string().min(1, "Nome é obrigatório."),
+    tipo: z.enum(["Caminhão", "Escavadeira", "Guindaste"], {
+        errorMap: () => ({ message: "Tipo iválido." })
+    }),
+    status: z.enum(["Ativo", "Quebrado", "Manutenção", "Parado na oficina"], {
+        errorMap: () => ({ message: "Status inválido." })
+    }),
+    img_url: z.string().min(1, "URL da imagem é obrigatória.").url("URL de imagem inválida.")
+})
 
 export default function Table() {
 
@@ -51,14 +64,17 @@ export default function Table() {
         try {
             await api.delete(`equipamento/${id}`)
 
+            toast.success("Equipamento deletado com sucesso!");
             setEquipamento(equipamento.filter(e => e.id != id));
             setOpen(false);
         } catch (error) {
+            toast.error("Não foi possível deletar este equipamento.");
             console.log(error);
         }
     }
 
     function handleOpen(equipamento: EquipamentoType) {
+        // console.log(equipamento)
         setSelectedEquipamento(equipamento);
         setOpen(true);
     }
@@ -68,21 +84,28 @@ export default function Table() {
         setOpen(false);
     }
 
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+    const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+        resolver: zodResolver(equipamentosSchema)
+    });
 
     async function editEquipamento(data: FormData) {
-        try {
-            const response = await api.put(`equipamento/${data.id}`, data)
 
-            console.log(response);
-            toast.success("Equipamento atualizado com sucesso!")
-            setOpen(false);
+        // console.log(data);
+
+        try {
+            if (selectedEquipamento) {
+                const response = await api.put(`equipamento/${selectedEquipamento.id}`, data)
+
+                console.log(response);
+                toast.success("Equipamento atualizado com sucesso!")
+                setOpen(false);
+            }
         } catch (error) {
             console.log(error);
         }
     }
 
-    
+
 
     return (
         <>
@@ -138,48 +161,48 @@ export default function Table() {
                             }
                         </div>
                         <form onSubmit={handleSubmit(editEquipamento)} style={{ marginTop: "10px", maxWidth: "600px", width: "100%" }}>
-                            <Box>
-                                <TextField defaultValue={selectedEquipamento.nome} variant="outlined" label="Nome" {...register("nome", { required: "Este campo é obrigatórtio." })} fullWidth />
-                                <p style={{ color: "red", fontSize: "12px" }}>{errors.nome?.message}</p>
+                            <Box sx={{ marginTop: "20px" }}>
+                                <TextField defaultValue={selectedEquipamento.nome} variant="outlined" label="Nome" {...register("nome")} error={!!errors.nome}
+                                    helperText={errors.nome?.message} fullWidth />
                             </Box>
-                            <Box sx={{ display: "flex", gap: "5px" }}>
-                                <FormControl fullWidth sx={{ display: "flex", flexDirection: "column" }}>
-                                    <InputLabel id="id-equipamento-label">Tipo</InputLabel>
-                                    <Select
-                                        labelId="id-equipamento-label"
-                                        id="id-equipamento"
+                            <Box sx={{ display: "flex", gap: "5px", marginTop: "20px" }}>
+                                <FormControl fullWidth>
+                                    <TextField
+                                        id="outlined-select-currency"
+                                        select
                                         label="Tipo"
-                                        {...register("tipo", { required: "Este campo é obrigatório" })}
+                                        error={!!errors.tipo}
+                                        helperText={errors.tipo?.message}
+                                        {...register("tipo")}
                                         defaultValue={selectedEquipamento.tipo}
                                     >
                                         <MenuItem value="Caminhão">Caminhão</MenuItem>
                                         <MenuItem value="Escavadeira">Escavadeira</MenuItem>
                                         <MenuItem value="Guindaste">Guindaste</MenuItem>
-                                    </Select>
-                                    <p style={{ color: "red", fontSize: "12px" }}>{errors.tipo?.message}</p>
+                                    </TextField>
                                 </FormControl>
-                                <FormControl fullWidth sx={{ display: "flex", flexDirection: "column" }}>
-                                    <InputLabel id="id-status-label">Status</InputLabel>
-                                    <Select
-                                        labelId="id-status-label"
+                                <FormControl fullWidth>
+                                    <TextField
                                         id="id-status"
                                         label="Status"
-                                        {...register("status", { required: "Este campo é obrigatório" })}
+                                        select
+                                        error={!!errors.status}
+                                        helperText={errors.status?.message}
+                                        {...register("status")}
                                         defaultValue={selectedEquipamento.status}
                                     >
                                         <MenuItem value="Ativo">Ativo</MenuItem>
                                         <MenuItem value="Quebrado">Quebrado</MenuItem>
                                         <MenuItem value="Manutenção">Manutenção</MenuItem>
                                         <MenuItem value="Parado na oficina">Parado na oficina</MenuItem>
-                                    </Select>
-                                    <p style={{ color: "red", fontSize: "12px" }}>{errors.status?.message}</p>
+                                    </TextField>
                                 </FormControl>
                             </Box>
-                            <Box >
-                                <TextField defaultValue={selectedEquipamento.status} variant="outlined" label="URL da imagem" {...register("img_url", { required: "Este campo é obrigatório" })} fullWidth />
-                                <p style={{ color: "red", fontSize: "12px" }}>{errors.img_url?.message}</p>
+                            <Box sx={{ marginTop: "20px" }}>
+                                <TextField defaultValue={selectedEquipamento.img_url} variant="outlined" label="URL da imagem" {...register("img_url")} fullWidth
+                                    error={!!errors.img_url} helperText={errors.img_url?.message} />
                             </Box>
-                            <Box style={{ display: "flex", justifyContent: "flex-end", gap: "5px" }}>
+                            <Box style={{ display: "flex", justifyContent: "flex-end", gap: "5px", marginTop: "20px" }}>
                                 <Button variant="contained" sx={{ backgroundColor: "red" }} onClick={() => deleteEquipamento(selectedEquipamento.id)}>Deletar</Button>
                                 <Button variant="contained" type="submit">Salvar</Button>
                             </Box>

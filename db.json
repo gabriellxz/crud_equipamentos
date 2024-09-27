@@ -29,46 +29,25 @@
       "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
     },
     {
-      "id": "fb52",
+      "nome": "cccccccc",
+      "tipo": "Caminhão",
+      "status": "Ativo",
+      "img_url": "Ativo",
+      "id": "fb52"
+    },
+    {
       "nome": "caminhão",
       "tipo": "Caminhão",
       "status": "Ativo",
-      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
+      "img_url": "Ativo",
+      "id": "613d"
     },
     {
-      "id": "bb49",
-      "nome": "aaaaaaa",
-      "tipo": "Escavadeira",
-      "status": "Ativo",
-      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
-    },
-    {
-      "id": "613d",
-      "nome": "caminhão",
-      "tipo": "Caminhão",
-      "status": "Ativo",
-      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
-    },
-    {
-      "id": "be90",
-      "nome": "mercedes",
+      "nome": "dddddd",
       "tipo": "Escavadeira",
       "status": "Quebrado",
-      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
-    },
-    {
-      "id": "e880",
-      "nome": "mercedes",
-      "tipo": "Escavadeira",
-      "status": "Quebrado",
-      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
-    },
-    {
-      "id": "6967",
-      "nome": "caminhão",
-      "tipo": "Guindaste",
-      "status": "Quebrado",
-      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn"
+      "img_url": "https://imgs.search.brave.com/t5TnKWxeq0LerBSeuKb5VC9MpW1G58yYQbkDBbPXrTw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY2FtaW5ob2Vz/ZWNhcnJldGFzLmNv/bS5ici9jbGllbnRl/XzAwNTA0OC92ZWlj/dWxvcy8xMjA1NjE1/X2ltZ18xOTIwX2Jp/Zy5qcGVn",
+      "id": "be90"
     }
   ]
 }
